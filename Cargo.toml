@@ -1,0 +1,30 @@
+[package]
+name = "sysevents"
+version = "1.0.0"
+edition = "2021"
+rust-version = "1.74"
+authors = ["Your Name <you@example.com>"]
+description = "Show boot, shutdown, suspend and resume events for a given date, read directly from the systemd journal"
+license = "MIT"
+repository = "https://github.com/yourname/sysevents"
+readme = "README.md"
+keywords = ["systemd", "journal", "journalctl", "boot", "arch-linux"]
+categories = ["command-line-utilities"]
+
+[[bin]]
+name = "sysevents"
+path = "src/main.rs"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
+
+[dependencies]
+clap = { version = "4", default-features = false, features = ["std", "derive", "help", "usage", "error-context"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+chrono = { version = "0.4", default-features = false, features = ["std", "clock"] }
+thiserror = "1"
